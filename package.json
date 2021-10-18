@@ -1,0 +1,39 @@
+{
+  "name": "my-micro-app",
+  "version": "0.0.0",
+  "description": "micro front-end applications for tripwise",
+  "private": false,
+  "scripts": {
+    "bootstrap": "npm install && npm-run-all --serial install:*",
+    "start": "npm run start:main-app",
+    "start:main-app": "npm-run-all --parallel build:watch start-child:* main-app",
+    "build:watch": "cross-env NODE_ENV='development'",
+    "install:main-app": "cd main_apps/main-app && npm install",
+    "install:child-react16": "cd child_apps/react16 && npm install",
+    "install:child-react17": "cd child_apps/react17 && npm install",
+    "main-app": "cd main_apps/main-app && npm run dev",
+    "start-child:react16": "cd child_apps/react16 && npm run dev",
+    "start-child:react17": "cd child_apps/react17 && npm run start"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "webcomponents",
+    "micro-frontend",
+    "microapp"
+  ],
+  "lint-staged": {
+    "**/*.{js,ts}": [
+      "yarn lint"
+    ]
+  },
+  "dependencies": {
+    "@micro-zoe/micro-app": "*"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "cross-env": "~7.0.3",
+    "npm-run-all": "~4.1.5"
+  }
+}
